@@ -47,6 +47,20 @@ exports.saveMarkdown = (file, content) => {
   openFile(file);
 };
 
+exports. saveHtml = content => {
+  const file = dialog.showSaveDialog(mainWindow, {
+    title: 'Save HTML',
+    defaultPath: app.getPath('desktop'),
+    filters: [
+      { name: 'HTML Files', extensions: ['html', 'htm'] }
+    ],
+  });
+
+  if (!file) return;
+
+  fs.writeFileSync(file, content);
+};
+
 const openFile = (file) => {
   const content = fs.readFileSync(file).toString();
   app.addRecentDocument(file);

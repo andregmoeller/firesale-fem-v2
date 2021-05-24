@@ -38,6 +38,7 @@ const updateUserInterface = isEdited => {
   currentWindow.setDocumentEdited(isEdited);
 
   showFileButton.disabled = !filePath;
+  openInDefaultButton.disabled = !filePath;
 
   saveMarkdownButton.disabled = !isEdited;
   revertButton.disabled = !isEdited;
@@ -70,6 +71,14 @@ showFileButton.addEventListener('click', () => {
   }
 
   shell.showItemInFolder(filePath);
+});
+
+openInDefaultButton.addEventListener('click', () => {
+  if (!filePath) {
+    return alert('Nope');
+  }
+
+  shell.openItem(filePath);
 });
 
 ipcRenderer.on('file-opened', (event, file, content) => {

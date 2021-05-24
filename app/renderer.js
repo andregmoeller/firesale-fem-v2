@@ -34,7 +34,7 @@ const updateUserInterface = isEdited => {
     title = `${title} (Edited)`;
   }
 
-  currentWindow.setRepresentedFilename(filePath);
+  if (filePath) currentWindow.setRepresentedFilename(filePath);
   currentWindow.setDocumentEdited(isEdited);
 
   saveMarkdownButton.disabled = !isEdited;
@@ -52,6 +52,10 @@ markdownView.addEventListener('keyup', event => {
 
 openFileButton.addEventListener('click', () => {
   mainProcess.getFileFromUser();
+});
+
+saveMarkdownButton.addEventListener('click', () => {
+  mainProcess.saveMarkdown(filePath, markdownView.value);
 });
 
 ipcRenderer.on('file-opened', (event, file, content) => {

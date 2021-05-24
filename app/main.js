@@ -47,7 +47,7 @@ exports.saveMarkdown = (file, content) => {
   openFile(file);
 };
 
-exports. saveHtml = content => {
+exports.saveHtml = content => {
   const file = dialog.showSaveDialog(mainWindow, {
     title: 'Save HTML',
     defaultPath: app.getPath('desktop'),
@@ -61,8 +61,8 @@ exports. saveHtml = content => {
   fs.writeFileSync(file, content);
 };
 
-const openFile = (file) => {
+const openFile = (exports.openFile = file => {
   const content = fs.readFileSync(file).toString();
   app.addRecentDocument(file);
   mainWindow.webContents.send('file-opened', file, content);
-};
+});
